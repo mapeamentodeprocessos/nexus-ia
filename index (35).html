@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google" content="notranslate">
+  <title>Nexus IA</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✦</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Cormorant:wght@600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=DM+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,400&display=swap" rel="stylesheet">
+  <style>
+    /* ═════════════════════════════════════════════════════════════
+       SISTEMA DE TEMAS — 3 modos com psicologia das cores
+       ═════════════════════════════════════════════════════════════
+       • DARK (padrão): elegância noturna, dourado sofisticado
+       • LIGHT: papel editorial, foco em leitura, off-white
+       • AZURE: azul clarinho, confiança e clareza (calma + foco)
+    */
+
+    /* ── DARK: elegância, sofisticação, foco noturno ── */
+    html[data-theme="dark"] {
+      --bg:       #0b0c14;
+      --surface:  #10111c;
+      --card:     #141520;
+      --elevated: #191a28;
+      --border:   #1e2035;
+      --border-h: #2d304f;
+      --shadow:   rgba(0,0,0,0.5);
+
+      --accent:     #c8a44a;
+      --accent-l:   #e2be6e;
+      --accent-dim: rgba(200,164,74,0.12);
+      --accent-glow:rgba(200,164,74,0.22);
+      --accent-deep:#8a6420;
+
+      --blue:      #4a7fc1;
+      --blue-l:    #6b9fd6;
+      --blue-dim:  rgba(74,127,193,0.13);
+
+      --green:     #3d9e72;
+      --green-dim: rgba(61,158,114,0.13);
+      --red:       #c0514f;
+      --red-dim:   rgba(192,81,79,0.13);
+      --purple:    #7d63c0;
+      --purple-dim:rgba(125,99,192,0.13);
+
+      --text:    #e8e6e0;
+      --text-s:  #b8b5ac;
+      --muted:   #7a7d99;
+      --faint:   #3f4260;
+
+      --ambient: radial-gradient(ellipse 55% 35% at 15% 8%, rgba(200,164,74,0.035) 0%, transparent 65%),
+                 radial-gradient(ellipse 40% 55% at 85% 85%, rgba(74,127,193,0.04) 0%, transparent 65%),
+                 radial-gradient(ellipse 30% 40% at 50% 50%, rgba(74,127,193,0.02) 0%, transparent 70%);
+      --msg-ai-bg: #10111c;
+      --msg-user-bg: rgba(74,127,193,0.08);
+      --code-bg: #080912;
+    }
+
+    /* ── LIGHT: cream/marfim editorial, remete a livros ── */
+    html[data-theme="light"] {
+      --bg:       #faf8f3;
+      --surface:  #ffffff;
+      --card:     #ffffff;
+      --elevated: #f5f2ea;
+      --border:   #e8e1cf;
+      --border-h: #d4c9a8;
+      --shadow:   rgba(40,35,20,0.08);
+
+      --accent:     #a8863b;
+      --accent-l:   #c8a44a;
+      --accent-dim: rgba(168,134,59,0.10);
+      --accent-glow:rgba(168,134,59,0.25);
+      --accent-deep:#6f5820;
+
+      --blue:      #3a6aad;
+      --blue-l:    #5b8cc8;
+      --blue-dim:  rgba(58,106,173,0.10);
+
+      --green:     #2d8560;
+      --green-dim: rgba(45,133,96,0.10);
+      --red:       #b43e3c;
+      --red-dim:   rgba(180,62,60,0.10);
+      --purple:    #6a4fab;
+      --purple-dim:rgba(106,79,171,0.10);
+
+      --text:    #2a2518;
+      --text-s:  #4a4330;
+      --muted:   #7a7158;
+      --faint:   #bdb39a;
+
+      --ambient: radial-gradient(ellipse 60% 40% at 15% 8%, rgba(168,134,59,0.05) 0%, transparent 65%),
+                 radial-gradient(ellipse 45% 60% at 85% 85%, rgba(58,106,173,0.04) 0%, transparent 65%);
+      --msg-ai-bg: #ffffff;
+      --msg-user-bg: rgba(58,106,173,0.08);
+      --code-bg: #f5f2ea;
+    }
+
+    /* ── AZURE: azul claríssimo, confiança + calma + clareza ── */
+    html[data-theme="azure"] {
+      --bg:       #eef4fb;
+      --surface:  #ffffff;
+      --card:     #ffffff;
+      --elevated: #e3eef9;
+      --border:   #cbdbed;
+      --border-h: #a8c3e0;
+      --shadow:   rgba(20,50,90,0.08);
+
+      --accent:     #2d5fa0;
+      --accent-l:   #4a7fc1;
+      --accent-dim: rgba(45,95,160,0.10);
+      --accent-glow:rgba(45,95,160,0.22);
+      --accent-deep:#1a3d6d;
+
+      --blue:      #2d5fa0;
+      --blue-l:    #4a7fc1;
+      --blue-dim:  rgba(45,95,160,0.10);
+
+      --green:     #2d8560;
+      --green-dim: rgba(45,133,96,0.10);
+      --red:       #c0514f;
+      --red-dim:   rgba(192,81,79,0.10);
+      --purple:    #6a4fab;
+      --purple-dim:rgba(106,79,171,0.10);
+
+      --text:    #142b4a;
+      --text-s:  #2a4366;
+      --muted:   #5a7594;
+      --faint:   #9cb3cd;
+
+      --ambient: radial-gradient(ellipse 60% 45% at 15% 8%, rgba(74,127,193,0.08) 0%, transparent 65%),
+                 radial-gradient(ellipse 50% 55% at 85% 85%, rgba(74,127,193,0.05) 0%, transparent 65%);
+      --msg-ai-bg: #ffffff;
+      --msg-user-bg: rgba(45,95,160,0.10);
+      --code-bg: #e3eef9;
+    }
+
+    /* ── Fonts ─────────────────────────────────────────────── */
+    html {
+      --serif:       'Cormorant Garamond', Georgia, serif;
+      --serif-heavy: 'Cormorant', Georgia, serif;
+      --display:     'Fraunces', 'Cormorant', Georgia, serif;
+      --sans:        'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --mono:        'DM Mono', 'SF Mono', Menlo, monospace;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body, #root { height: 100%; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 15px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow: hidden;
+      transition: background-color 0.4s ease, color 0.4s ease;
+    }
+
+    /* Ambient background */
+    body::before {
+      content: '';
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background: var(--ambient);
+      transition: background 0.6s ease;
+    }
+    #root { position: relative; z-index: 1; }
+
+    /* ── Loading ─────────────────────────────────────────── */
+    #loading {
+      position: fixed; inset: 0; background: var(--bg);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 14px; z-index: 9999; transition: opacity 0.5s ease;
+    }
+    #loading .brand {
+      font-family: var(--display);
+      font-size: 46px; font-weight: 700;
+      color: var(--accent); letter-spacing: -1.2px;
+      animation: fadeUp 0.6s ease both;
+      font-variation-settings: 'opsz' 144, 'SOFT' 100;
+    }
+    #loading .sub {
+      font-family: var(--sans); font-size: 11px;
+      color: var(--muted); letter-spacing: 2px; text-transform: uppercase;
+      animation: fadeUp 0.6s ease 0.1s both;
+    }
+    #loading .bar {
+      width: 90px; height: 2px; background: var(--border);
+      border-radius: 99px; overflow: hidden; margin-top: 10px;
+      animation: fadeUp 0.6s ease 0.2s both;
+    }
+    #loading .bar::after {
+      content: ''; display: block; height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--accent-l));
+      animation: loadBar 1.2s ease infinite;
+    }
+    @keyframes loadBar { 0%{width:0;margin-left:0} 50%{width:100%;margin-left:0} 100%{width:0;margin-left:100%} }
+
+    /* ── Animations ──────────────────────────────────────── */
+    @keyframes fadeUp   { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+    @keyframes fadeIn   { from{opacity:0} to{opacity:1} }
+    @keyframes float    { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
+    @keyframes spin     { to{transform:rotate(360deg)} }
+    @keyframes pulse    { 0%,100%{opacity:1} 50%{opacity:0.45} }
+    @keyframes bounceDot{ 0%,60%,100%{transform:translateY(0)} 30%{transform:translateY(-6px)} }
+    @keyframes slideIn  { from{opacity:0;transform:translateX(-8px)} to{opacity:1;transform:translateX(0)} }
+    @keyframes glow     { 0%,100%{box-shadow:0 0 0 0 var(--accent-glow)} 50%{box-shadow:0 0 0 8px transparent} }
+
+    /* ── Scrollbar ───────────────────────────────────────── */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--border-h); border-radius: 99px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+    /* ── Prose / Markdown (respostas da IA) ──────────────── */
+    .prose {
+      font-size: 15px;
+      line-height: 1.75;
+      color: var(--text);
+      font-family: var(--sans);
+    }
+    .prose > *:first-child { margin-top: 0; }
+    .prose > *:last-child { margin-bottom: 0; }
+
+    .prose h1, .prose h2, .prose h3 {
+      font-family: var(--display);
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.3px;
+      line-height: 1.25;
+    }
+    .prose h1 { font-size: 1.7rem; margin: 1.3em 0 0.5em; }
+    .prose h2 { font-size: 1.35rem; margin: 1.2em 0 0.45em; }
+    .prose h3 { font-size: 1.12rem; margin: 1em 0 0.35em; color: var(--accent); }
+
+    .prose p { margin: 0.7em 0; }
+    .prose ul, .prose ol { padding-left: 1.5em; margin: 0.7em 0; }
+    .prose li { margin: 0.35em 0; }
+    .prose li::marker { color: var(--accent); }
+    .prose strong { color: var(--text); font-weight: 700; }
+    .prose em { color: var(--text-s); font-style: italic; font-family: var(--serif); font-size: 1.05em; }
+
+    .prose code:not([class]) {
+      background: var(--code-bg);
+      color: var(--accent);
+      padding: 2px 7px;
+      border-radius: 5px;
+      font-family: var(--mono);
+      font-size: 0.88em;
+      border: 1px solid var(--border);
+      font-weight: 500;
+    }
+    .prose pre {
+      background: var(--code-bg) !important;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px 18px;
+      overflow: auto;
+      margin: 0.9em 0;
+      position: relative;
+    }
+    .prose pre code {
+      background: transparent;
+      border: none;
+      padding: 0;
+      color: var(--text);
+      font-size: 13.5px;
+      font-weight: 400;
+    }
+
+    .prose blockquote {
+      border-left: 3px solid var(--accent);
+      padding: 0.3em 0 0.3em 1.2em;
+      color: var(--text-s);
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 1.08em;
+      margin: 0.9em 0;
+      background: var(--accent-dim);
+      border-radius: 0 8px 8px 0;
+    }
+
+    .prose table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0.9em 0;
+      font-size: 0.93em;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .prose th {
+      background: var(--elevated);
+      color: var(--text);
+      padding: 10px 14px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+      font-weight: 600;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      font-family: var(--sans);
+    }
+    .prose td {
+      padding: 9px 14px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text-s);
+    }
+    .prose tr:last-child td { border-bottom: none; }
+    .prose tr:nth-child(even) td { background: var(--elevated); }
+
+    .prose a {
+      color: var(--accent);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-color: var(--accent-dim);
+      transition: text-decoration-color 0.15s;
+    }
+    .prose a:hover { text-decoration-color: var(--accent); }
+    .prose hr { border: none; border-top: 1px solid var(--border); margin: 1.4em 0; }
+
+    select option { background: var(--card); color: var(--text); }
+    input::placeholder, textarea::placeholder { color: var(--faint); }
+    button { font-family: var(--sans); }
+
+    /* Select stylization */
+    select {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M6 8L0 0h12L6 8z' fill='%237a7d99'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      padding-right: 32px !important;
+    }
+
+    /* Smooth theme transitions */
+    .theme-transition, .theme-transition * {
+      transition: background-color 0.35s ease, border-color 0.35s ease, color 0.35s ease !important;
+    }
+  </style>
+</head>
+<body>
+  <div id="loading">
+    <div class="brand">Nexus IA</div>
+    <div class="sub">Assistente Generativo</div>
+    <div class="bar"></div>
+  </div>
+  <div id="root"></div>
+
+  <script>
+    // Aplica tema salvo antes do React carregar (evita flash)
+    try {
+      const savedTheme = localStorage.getItem('nexus-theme-v1') || 'dark';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+    } catch(e) {}
+  </script>
+
+  <script crossorigin src="https://cdn.jsdelivr.net/npm/react@18.2.0/umd/react.production.min.js"></script>
+  <script crossorigin src="https://cdn.jsdelivr.net/npm/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked@9.1.6/marked.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+
+  <!-- Leitura de arquivos no navegador: PDF, Word, Excel -->
+  <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mammoth@1.6.0/mammoth.browser.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  <script>
+    if (window.pdfjsLib) {
+      window.pdfjsLib.GlobalWorkerOptions.workerSrc =
+        'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js';
+    }
+  </script>
+
+  <script src="app.js"></script>
+
+  <script>
+    try {
+      const root = ReactDOM.createRoot(document.getElementById('root'));
+      root.render(React.createElement(window.__NexusIA));
+      setTimeout(() => {
+        const l = document.getElementById('loading');
+        if(l){ l.style.opacity='0'; setTimeout(()=>l.remove(),500); }
+      }, 700);
+    } catch(err) {
+      document.getElementById('loading').innerHTML =
+        '<div style="color:#c0514f;font-family:monospace;padding:20px;text-align:center">' +
+        '<div style="font-size:28px;margin-bottom:10px">⚠</div>' +
+        '<div>Erro: '+err.message+'</div></div>';
+      console.error(err);
+    }
+  </script>
+</body>
+</html>
